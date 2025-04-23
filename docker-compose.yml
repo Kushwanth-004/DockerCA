@@ -1,0 +1,42 @@
+version: '3.8'
+services:
+  backend:
+    build: ./backend
+    container_name: backend
+    ports:
+      - "5000:5000"
+    environment:
+      - MONGODB_URL=mongodb+srv://kumar:kumar@jaswanth.lnset.mongodb.net/?retryWrites=true&w=majority&appName=jaswanth
+      - ACCESS_TOKEN_SECRET=SECRETTOKEN
+      - REFRESH_TOKEN_SECRET=REFRESHTOKEN
+      - CLOUD_NAME=dgodzmnyy
+      - CLOUD_API_KEY=644126883864843
+      - CLOUD_SECRET_KEY=lY3jcEnBWOa4VN4TwJCv6an4nA8
+      - CLIENT_URL=http://localhost:3000/
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+    command: npm start
+    networks:
+      - app-network
+
+  frontend:
+    build: ./frontend
+    container_name: frontend
+    ports:
+      - "3000:3000"
+    environment:
+      - REACT_APP_BACKEND_URL=http://backend:5000/
+    volumes:
+      - ./frontend:/app
+    stdin_open: true
+    tty: true
+    command: npm start
+    depends_on:
+      - backend
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge

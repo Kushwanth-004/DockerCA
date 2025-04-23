@@ -1,0 +1,25 @@
+*{
+    padding: 1;
+    box-sizing: border-box;
+    margin: 0;
+}
+.App{
+    min-height: 100vh;
+    max-width: 1230px;
+    margin:0 auto;
+    padding: 0 10px; 
+    box-shadow: 0 0 35px #eee;
+}
+a{
+    text-decoration: none;
+}
+ul li{
+    list-style: none;
+}
+button{
+    border: none;
+    outline: none;
+    background: transparent;
+    cursor: pointer;
+}
+@import url("./components/header/header.css")
